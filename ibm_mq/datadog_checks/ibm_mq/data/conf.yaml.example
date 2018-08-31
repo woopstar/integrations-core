@@ -1,0 +1,61 @@
+init_config:
+
+instances:
+  ## @param channel - string - required
+  ## The IBMMQ Channel to connect to
+  #
+  - channel: 'DEV.ADMIN.SVRCONN'
+
+  ## @param queue_manager - string - required
+  ## The name of the queue manager
+  #
+    queue_manager: 'datadog'
+
+  ## @param host - string - required - default: localhost
+  ## The host IBM MQ is running on
+  #
+    host: 'localhost'
+
+  ## @param port - string - required - default: 1414
+  ## The port IBM MQ is listening on
+  #
+    port: '1414'
+
+  ## @param username - string - optional
+  ## The IBMMQ Channel to connect to
+  #
+    username: 'admin'
+
+  ## @param password - string - optional
+  ## The IBMMQ Channel to connect to
+  #
+    password: 'passw0rd'
+
+  ## @param queues - string - optional
+  ## The IBMMQ queues to get data from (no queue metrics will be sent, but the check will run without it)
+  #
+    queues:
+      - 'DEV.QUEUE.1'
+
+  ## @param tags  - list of strings - optional
+  ## List of tags to attach to every metric, event, and service check emitted by this integration.
+  ##
+  ## Learn more about tagging at https://docs.datadoghq.com/tagging
+  #
+    # tags:
+    #   - my_queue_manager
+
+  ## @param queues - string - required
+  ## The IBMMQ Channel to connect to
+  #
+    # ssl_auth: 'no'
+
+  ## @param ssl_cipher_spec - string - optional - default: 'TLS_RSA_WITH_AES_256_CBC_SHA'
+  ## The ssl cipher
+  #
+    # ssl_cipher_spec: 'TLS_RSA_WITH_AES_256_CBC_SHA'
+
+  ## @param ssl_key_repository_location - string - optional - default: '/var/mqm/ssl-db/client/KeyringClient'
+  ## The location of the ssl keyring
+  #
+    # ssl_key_repository_location: '/var/mqm/ssl-db/client/KeyringClient'
