@@ -59,3 +59,38 @@ instances:
   ## The location of the ssl keyring
   #
     # ssl_key_repository_location: '/var/mqm/ssl-db/client/KeyringClient'
+
+
+## Log section (Available for Agent >=6.0)
+
+logs:
+    ## @param type - string - required
+    ## type of log input source (tcp / udp / file)
+    #
+    - type: file
+
+    ## @param path - string - required
+    ## Set port if type is tcp or udp. Set path if type is file
+    #
+      path: /var/mqm/errors/*
+
+    ## @param service - string - required
+    ## name of the service owning the log
+    #
+      service: ibm_mq
+
+    ## @param channel - string - required
+    ## attribute that defines which integration is sending the logs
+    #
+      source: ibm_mq
+
+    ## @param channel - string - required
+    ## Multiple value attribute. Can be used to refine the source attribute
+    #
+      sourcecategory: errors
+
+    ## @param tags - list of strings - optional
+    ## add tags to each logs collected
+    #
+      # tags:
+      #   - my_queue_manager
