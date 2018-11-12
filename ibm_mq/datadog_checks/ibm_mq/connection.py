@@ -29,15 +29,6 @@ def get_normal_connection(config):
             config.username,
             config.password
         )
-    elif config.username:
-        log.debug("connecting with username only")
-        queue_manager = pymqi.connect(
-            config.queue_manager_name,
-            config.channel,
-            config.host_and_port,
-            config.username,
-            config.password
-        )
     else:
         log.debug("connecting without a username and password")
         queue_manager = pymqi.connect(

@@ -15,7 +15,8 @@ except ImportError:
 
 from . import errors, metrics
 from .config import IBMMQConfig
-from .connection import get_queue_manager_connection
+from .connection import get_queue_manager_connection, disconnect
+from .environment import Environment
 
 
 class IbmMqCheck(AgentCheck):
@@ -33,8 +34,11 @@ class IbmMqCheck(AgentCheck):
             raise errors.PymqiException("You need to install pymqi")
 
         config = IBMMQConfig(instance)
+        environment = Environment(config, self.log)
 
         config.check_properly_configured()
+
+        environment.set_env()
 
         try:
             queue_manager = get_queue_manager_connection(config)
@@ -42,6 +46,7 @@ class IbmMqCheck(AgentCheck):
         except Exception as e:
             self.warning("cannot connect to queue manager: {}".format(e))
             self.service_check(self.SERVICE_CHECK, AgentCheck.CRITICAL, config.tags)
+            environment.clean_env()
             return
 
         self.queue_manager_stats(queue_manager, config.tags)
@@ -53,9 +58,13 @@ class IbmMqCheck(AgentCheck):
                 queue = pymqi.Queue(queue_manager, queue_name)
                 self.queue_stats(queue, queue_tags)
                 self.service_check(self.QUEUE_SERVICE_CHECK, AgentCheck.OK, queue_tags)
+                queue.close()
             except Exception as e:
                 self.warning('Cannot connect to queue {}: {}'.format(queue_name, e))
                 self.service_check(self.QUEUE_SERVICE_CHECK, AgentCheck.CRITICAL, queue_tags)
+
+        environment.clean_env()
+        queue_manager.disconnect()
 
     def queue_manager_stats(self, queue_manager, tags):
         for mname, pymqi_value in iteritems(metrics.QUEUE_MANAGER_METRICS):
