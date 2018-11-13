@@ -49,13 +49,12 @@ class CommandLine:
         return result, err
 
     def _mk_cmd(self, cmd):
-        full_cmd = [
-            "echo",
-            cmd,
+        full_cmd = ["echo"] + cmd
+        full_cmd.extend([
             "|",
             self.cmd_path,
             self.queue_manager_name
-        ]
+        ])
         return full_cmd
 
     def get_all_queues(self):
