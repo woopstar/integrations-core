@@ -25,7 +25,7 @@ class Environment:
         cmd = [
             crtmqenv_cmd,
             '-m',
-            queue_manager_name,
+            self.queue_manager_name,
             '-k'
         ]
 
