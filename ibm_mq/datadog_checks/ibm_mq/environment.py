@@ -6,14 +6,14 @@ import copy
 import sys
 import logging
 
-from os import path
+from os import path, environ
 
 from datadog_checks.utils.subprocess_output import get_subprocess_output
 
 
 class Environment:
     def __init__(self, config, log):
-        self.old_env = copy.deepcopy(sys.environ)
+        self.old_env = copy.deepcopy(environ)
         self.log = log
 
         self.mq_installation_dir = config.mq_installation_dir
@@ -41,7 +41,7 @@ class Environment:
             name = s[0]
             value = s[1]
 
-            sys.environ[name] = value
+            environ[name] = value
 
     def clean_env(self):
-        sys.environ = self.old_env
+        environ = self.old_env
