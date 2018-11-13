@@ -13,6 +13,7 @@ from .metrics import Metrics
 from .config import IBMMQConfig
 from .connection import Connection
 from .environment import Environment
+from .command_line import CommandLine
 
 
 class IbmMqCheck(AgentCheck):
@@ -51,6 +52,10 @@ class IbmMqCheck(AgentCheck):
 
         self.queue_manager_stats(queue_manager, config.tags, metrics)
         self.channel_stats(queue_manager, config.tags, metrics)
+
+        cli = CommandLine(config)
+
+        cli.get_all_queues()
 
         for queue_name in config.queues:
             queue_tags = config.tags + ["queue:{}".format(queue_name)]
