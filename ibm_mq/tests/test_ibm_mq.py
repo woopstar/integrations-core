@@ -69,3 +69,5 @@ def test_check(aggregator, instance, spin_up_ibmmq, seed_data):
         aggregator.assert_metric(metric, at_least=0)
 
     aggregator.assert_all_metrics_covered()
+
+    assert False
