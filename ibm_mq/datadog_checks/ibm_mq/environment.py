@@ -3,8 +3,6 @@
 # Licensed under a 3-clause BSD style license (see LICENSE)
 
 import copy
-import sys
-import logging
 import os
 
 from datadog_checks.utils.subprocess_output import get_subprocess_output
