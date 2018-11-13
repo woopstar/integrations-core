@@ -26,7 +26,7 @@ class IbmMqCheck(AgentCheck):
 
     def check(self, instance):
         config = IBMMQConfig(instance)
-        environment = Environment(config, self.log)
+        environment = Environment(config)
         config.check_properly_configured()
         environment.set_env()
 

@@ -5,14 +5,16 @@
 import copy
 import os
 
+import logging
+
 from datadog_checks.utils.subprocess_output import get_subprocess_output
+
+log = logging.getLogger(__file__)
 
 
 class Environment:
-    def __init__(self, config, log):
+    def __init__(self, config):
         self.old_env = copy.deepcopy(os.environ)
-        self.log = log
-
         self.mq_installation_dir = config.mq_installation_dir
         self.queue_manager_name = config.queue_manager_name
 
@@ -26,9 +28,9 @@ class Environment:
             '-k'
         ]
 
-        output, err, _ = get_subprocess_output(cmd, self.log, False)
+        output, err, _ = get_subprocess_output(cmd, log, False)
         if err:
-            self.log.info("cannot set IBM MQ environment, attempting to run without")
+            log.info("cannot set IBM MQ environment, attempting to run without")
             return
 
         split_output = output.splitlines()

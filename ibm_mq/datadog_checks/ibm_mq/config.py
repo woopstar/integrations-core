@@ -36,6 +36,8 @@ class IBMMQConfig:
 
         self.mq_installation_dir = instance.get('mq_installation_dir', '/opt/mqm/')
 
+        self.docker_container = instance.get('docker_container', None)
+
     def check_properly_configured(self):
         if not self.channel or not self.queue_manager_name or not self.host or not self.port:
             msg = "channel, queue_manager, host and port are all required configurations"
