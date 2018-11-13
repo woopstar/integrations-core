@@ -55,8 +55,8 @@ class IbmMqCheck(AgentCheck):
         for queue_name in config.queues:
             queue_tags = config.tags + ["queue:{}".format(queue_name)]
             try:
-                queue = self.pymqi.Queue(queue_manager, queue_name, metrics)
-                self.queue_stats(queue, queue_tags)
+                queue = self.pymqi.Queue(queue_manager, queue_name)
+                self.queue_stats(queue, queue_tags, metrics)
                 self.service_check(self.QUEUE_SERVICE_CHECK, AgentCheck.OK, queue_tags)
                 queue.close()
             except Exception as e:
