@@ -51,7 +51,7 @@ class CommandLine:
     def _mk_cmd(self, cmd):
         full_cmd = [
             "echo",
-            cmd
+            cmd,
             "|",
             self.cmd_path,
             self.queue_manager_name
