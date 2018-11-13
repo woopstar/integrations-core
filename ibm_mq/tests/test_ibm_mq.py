@@ -59,8 +59,8 @@ def test_check(aggregator, instance, spin_up_ibmmq, seed_data):
     check = IbmMqCheck('ibm_mq', {}, {})
     check.check(instance)
 
-    for m, v in iteritems(aggregator._metrics):
-        log.warning("{} {}".format(m, v))
+    # for m, v in iteritems(aggregator._metrics):
+    #     log.warning("{} {}".format(m, v))
 
     for metric in METRICS:
         aggregator.assert_metric(metric)
