@@ -6,6 +6,7 @@ import logging
 
 log = logging.getLogger(__file__)
 
+
 class Connection:
     def __init__(self):
         import pymqi
@@ -16,7 +17,6 @@ class Connection:
             return self.get_ssl_connection(config)
         else:
             return self.get_normal_connection(config)
-
 
     def get_normal_connection(self, config):
         if config.username and config.password:
@@ -37,7 +37,6 @@ class Connection:
             )
 
         return queue_manager
-
 
     def get_ssl_connection(self, config):
         cd = self.pymqi.CD()

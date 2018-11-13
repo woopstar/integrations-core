@@ -38,7 +38,7 @@ class Environment:
             name = s[0]
             value = s[1]
 
-            environ[name] = value
+            os.environ[name] = value
 
     def clean_env(self):
         os.environ = self.old_env
