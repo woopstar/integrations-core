@@ -57,8 +57,8 @@ class Metrics:
         }
 
     def depth_percent(self, queue):
-        depth_current = queue.inquire(queue_metrics()['depth_current'])
-        depth_max = queue.inquire(queue_metrics()['depth_max'])
+        depth_current = queue.inquire(self.queue_metrics()['depth_current'])
+        depth_max = queue.inquire(self.queue_metrics()['depth_max'])
 
         depth_fraction = depth_current / depth_max
         depth_percent = depth_fraction * 100
