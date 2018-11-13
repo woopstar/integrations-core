@@ -49,7 +49,10 @@ class CommandLine:
         return result, err
 
     def _mk_cmd(self, cmd):
-        full_cmd = ["echo"] + cmd
+        cmd = ['"'] + cmd + ['"']
+        cmd = " ".join(cmd)
+
+        full_cmd = ["echo", cmd] 
         full_cmd.extend([
             "|",
             self.cmd_path,
