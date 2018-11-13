@@ -12,14 +12,14 @@ from datadog_checks.utils.subprocess_output import get_subprocess_output
 
 
 class Environment:
-    def __init__(config, log):
+    def __init__(self, config, log):
         self.old_env = copy.deepcopy(sys.environ)
         self.log = log
 
         self.mq_installation_dir = config.mq_installation_dir
         self.queue_manager_name = config.queue_manager_name
 
-    def set_env():
+    def set_env(self):
         crtmqenv_cmd = path.join(self.mq_installation_dir, 'bin', 'crtmqenv')
 
         cmd = [
@@ -43,5 +43,5 @@ class Environment:
 
             sys.environ[name] = value
 
-    def clean_env():
+    def clean_env(self):
         sys.environ = self.old_env
