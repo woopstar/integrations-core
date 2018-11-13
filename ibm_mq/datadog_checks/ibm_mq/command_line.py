@@ -61,7 +61,7 @@ class CommandLine:
     def get_all_queues(self):
         cmd = ["dis", "queue('*')"]
 
-        result, err = _run_command(cmd)
+        result, err = self._run_command(cmd)
         log.warning(err)
         if err:
             raise err
