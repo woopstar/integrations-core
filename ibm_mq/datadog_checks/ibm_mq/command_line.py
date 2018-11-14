@@ -39,6 +39,7 @@ class CommandLine:
         result = None
         err = None
         if self.use_docker:
+            log.warning('using docker')
             client = docker.from_env()
             _, result = client.containers.exec_run(
                 " ".join(self._mk_cmd(cmd))
