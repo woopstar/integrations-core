@@ -20,7 +20,16 @@ def check():
 
 @pytest.fixture
 def instance():
-    return common.INSTANCE
+    inst = copy.deepcopy(common.INSTANCE)
+    container = subprocess.check_output([
+        'docker',
+        'ps',
+        '--no-trunc',
+        '-q'
+    ])
+    inst['docker_container'] = container
+
+    return inst
 
 
 @pytest.fixture
@@ -64,7 +73,7 @@ def spin_up_ibmmq():
         common.COMPOSE_FILE_PATH,
         env_vars=env,
         log_patterns=log_pattern,
-        down=down,
+        # down=down,
         sleep=10
     ):
         yield
