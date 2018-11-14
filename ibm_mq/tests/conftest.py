@@ -6,11 +6,15 @@ import os
 import pytest
 import subprocess
 import copy
+import docker
+import logging
 
 from datadog_checks.dev import docker_run  # , temp_dir
 from datadog_checks.ibm_mq import IbmMqCheck
 
 from . import common
+
+log = logging.getLogger(__file__)
 
 
 @pytest.fixture
@@ -28,6 +32,11 @@ def instance():
         '-q'
     ])
     inst['docker_container'] = container
+
+    log.warning(container)
+    client = docker.from_env()
+    cont = client.containers.get(container)
+    log.warning(container.exec_run(" echo hi"))
 
     return inst
 
