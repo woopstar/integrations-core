@@ -32,6 +32,8 @@ class CommandLine:
         self.queue_manager_name = self.config.queue_manager_name
 
         self.use_docker = False
+        log.warning(docker)
+        log.warning(docker_container)
         if self.docker_container and docker:
             self.use_docker = True
 
