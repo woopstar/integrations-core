@@ -28,7 +28,6 @@ def instance():
     container = subprocess.check_output([
         'docker',
         'ps',
-        '--no-trunc',
         '-q'
     ])
     inst['docker_container'] = container
