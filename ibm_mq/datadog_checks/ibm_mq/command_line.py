@@ -52,12 +52,19 @@ class CommandLine:
         cmd = ['"'] + cmd + ['"']
         cmd = " ".join(cmd)
 
-        full_cmd = ["echo", cmd] 
-        full_cmd.extend([
+        cmd = ["echo", cmd]
+        cmd.extend([
             "|",
             self.cmd_path,
             self.queue_manager_name
         ])
+
+        full_cmd = [
+            'bash',
+            '-c',
+            " ".join(cmd)
+        ]
+
         return full_cmd
 
     def get_all_queues(self):
