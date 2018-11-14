@@ -64,7 +64,7 @@ def spin_up_ibmmq():
         common.COMPOSE_FILE_PATH,
         env_vars=env,
         log_patterns=log_pattern,
-        # down=down,
+        down=down,
         sleep=10
     ):
         yield
