@@ -33,7 +33,7 @@ class CommandLine:
 
         self.use_docker = False
         log.warning(docker)
-        log.warning(docker_container)
+        log.warning(self.docker_container)
         if self.docker_container and docker:
             self.use_docker = True
 
