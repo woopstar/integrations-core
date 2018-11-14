@@ -76,6 +76,7 @@ class CommandLine:
         cmd = ["dis", "queue('*')"]
 
         result, err = self._run_command(cmd)
+        log.warning('hi')
         log.warning(err)
         if err:
             raise err

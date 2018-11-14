@@ -56,6 +56,7 @@ class IbmMqCheck(AgentCheck):
         cli = CommandLine(config)
 
         cli.get_all_queues()
+        log.warning('test')
 
         for queue_name in config.queues:
             queue_tags = config.tags + ["queue:{}".format(queue_name)]
