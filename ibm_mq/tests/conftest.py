@@ -37,7 +37,7 @@ def instance():
     log.warning(container)
     client = docker.from_env()
     cont = client.containers.get(container)
-    log.warning(container.exec_run(" echo hi"))
+    log.warning(cont.exec_run(" echo hi"))
 
     return inst
 
