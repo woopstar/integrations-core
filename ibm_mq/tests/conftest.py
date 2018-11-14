@@ -30,6 +30,8 @@ def instance():
         'ps',
         '-q'
     ])
+    container = container.decode("utf-8").strip()
+
     inst['docker_container'] = container
 
     log.warning(container)
