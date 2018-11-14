@@ -81,3 +81,5 @@ class CommandLine:
             raise err
 
         log.warning(result)
+
+        return result
