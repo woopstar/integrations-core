@@ -21,6 +21,7 @@ from datadog_checks.checks.libs.vmware.basic_metrics import BASIC_METRICS
 from datadog_checks.checks.libs.vmware.all_metrics import ALL_METRICS
 from datadog_checks.checks.libs.thread_pool import Pool
 from datadog_checks.checks.libs.timer import Timer
+from datadog_checks.base.utils.common import ensure_bytes
 from .common import SOURCE_TYPE
 from .event import VSphereEvent
 from .errors import BadConfigError, ConnectionError
@@ -323,7 +324,9 @@ class VSphereCheck(AgentCheck):
                 # Note: some mors have a None hostname
                 hostname = mor.get('hostname')
                 if hostname:
-                    external_host_tags.append((hostname, {SOURCE_TYPE: mor.get('tags')}))
+                    external_host_tags.append(
+                        (ensure_bytes(hostname), {SOURCE_TYPE: self._normalize_tags_type(mor.get('tags'))})
+                    )
 
         return external_host_tags
 
